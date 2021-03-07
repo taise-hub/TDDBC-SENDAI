@@ -73,11 +73,15 @@ func Test_StrawveryWeight(t *testing.T) {
 			args:     args{kind: "あまおう", weight: 9},
 			expected: "S",
 		},
+		"重さが10gの時サイズはM": {
+			args:     args{kind: "あまおう", weight: 10},
+			expected: "M",
+		},
 	}
 	for tName, test := range tests {
 		t.Run(tName, func(t *testing.T) {
-			actual, _ := New(test.args.kind, test.args.weight)
-			assert.Equal(t, test.expected, actual.Size())
+			sut, _ := New(test.args.kind, test.args.weight)
+			assert.Equal(t, test.expected, sut.Size())
 		})
 	}
 }

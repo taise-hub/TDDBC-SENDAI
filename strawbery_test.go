@@ -77,6 +77,22 @@ func Test_StrawveryWeight(t *testing.T) {
 			args:     args{kind: "あまおう", weight: 10},
 			expected: "M",
 		},
+		"重さが19gの時サイズはM": {
+			args:     args{kind: "あまおう", weight: 19},
+			expected: "M",
+		},
+		"重さが20gの時サイズはL": {
+			args:     args{kind: "あまおう", weight: 20},
+			expected: "L",
+		},
+		"重さが24gの時サイズはL": {
+			args:     args{kind: "あまおう", weight: 24},
+			expected: "L",
+		},
+		"重さが25gの時サイズはLL": {
+			args:     args{kind: "あまおう", weight: 25},
+			expected: "LL",
+		},
 	}
 	for tName, test := range tests {
 		t.Run(tName, func(t *testing.T) {

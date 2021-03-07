@@ -118,7 +118,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 				kind1:   "あまおう",
 				kind2:   "あまおう",
 				weight1: 1,
-				weight2: 2,
+				weight2: 25,
 			},
 			expected: true,
 		},
@@ -127,7 +127,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 				kind1:   "とちおとめ",
 				kind2:   "とちおとめ",
 				weight1: 1,
-				weight2: 2,
+				weight2: 25,
 			},
 			expected: true,
 		},
@@ -136,7 +136,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 				kind1:   "もういっこ",
 				kind2:   "もういっこ",
 				weight1: 1,
-				weight2: 2,
+				weight2: 25,
 			},
 			expected: true,
 		},
@@ -145,7 +145,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 				kind1:   "あまおう",
 				kind2:   "とちおとめ",
 				weight1: 1,
-				weight2: 2,
+				weight2: 25,
 			},
 			expected: false,
 		},
@@ -154,7 +154,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 				kind1:   "とちおとめ",
 				kind2:   "あまおう",
 				weight1: 1,
-				weight2: 2,
+				weight2: 25,
 			},
 			expected: false,
 		},
@@ -163,7 +163,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 				kind1:   "とちおとめ",
 				kind2:   "もういっこ",
 				weight1: 1,
-				weight2: 2,
+				weight2: 25,
 			},
 			expected: false,
 		},
@@ -177,4 +177,11 @@ func Test_StrawveryCompareKind(t *testing.T) {
 			assert.Equal(t, test.expected, actual)
 		})
 	}
+}
+
+func Test_LとLを比較するとuintの0を返す(t *testing.T) {
+	berry1, _ := New("とちおとめ", 24)
+	berry2, _ := New("とちおとめ", 20)
+	actual := CompareSize(berry1, berry2)
+	assert.Equal(t, uint(0), actual)
 }

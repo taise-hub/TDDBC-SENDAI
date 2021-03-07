@@ -50,3 +50,7 @@ func CompareKind(berry1 *Strawbery, berry2 *Strawbery) bool {
 	}
 	return true
 }
+
+func CompareSize(berry1 *Strawbery, berry2 *Strawbery) uint {
+	return 0
+}

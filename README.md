@@ -1,2 +1,2 @@
 # tddbc
-TDDBC Sendai
+TDDBC Sendaiの復習

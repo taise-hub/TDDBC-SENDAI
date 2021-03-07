@@ -101,3 +101,11 @@ func Test_StrawveryWeight(t *testing.T) {
 		})
 	}
 }
+
+//この辺でkindをちゃんとした名前にしたいなぁって気持ちが出てきた
+func Test_あまおうとあまおうを比較した時にtrueを返す(t *testing.T) {
+	berry1, _ := New("あまおう", 1)
+	berry2, _ := New("あまおう", 2)
+	actual := CompareKind(berry1, berry2)
+	assert.Equal(t, true, actual)
+}

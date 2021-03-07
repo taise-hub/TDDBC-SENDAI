@@ -43,3 +43,11 @@ func calcSize(weight uint) (string, error) {
 		return "", errors.New("重さには1以上の整数を入力してください")
 	}
 }
+
+func CompareKind(berry1 *Strawbery, berry2 *Strawbery) bool {
+	if berry1.kind != berry2.kind {
+		return false
+	}
+	return true
+
+}

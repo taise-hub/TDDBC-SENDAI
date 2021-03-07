@@ -122,6 +122,51 @@ func Test_StrawveryCompareKind(t *testing.T) {
 			},
 			expected: true,
 		},
+		"とちおとめととちおとめを比較した時にtrueを返す": {
+			args: args{
+				kind1:   "とちおとめ",
+				kind2:   "とちおとめ",
+				weight1: 1,
+				weight2: 2,
+			},
+			expected: true,
+		},
+		"もういっこともういっこを比較した時にtrueを返す": {
+			args: args{
+				kind1:   "もういっこ",
+				kind2:   "もういっこ",
+				weight1: 1,
+				weight2: 2,
+			},
+			expected: true,
+		},
+		"あまおうととちおとめを比較した時にfalseを返す": {
+			args: args{
+				kind1:   "あまおう",
+				kind2:   "とちおとめ",
+				weight1: 1,
+				weight2: 2,
+			},
+			expected: false,
+		},
+		"とちおとめとあまおうを比較した時にfalseを返す": {
+			args: args{
+				kind1:   "とちおとめ",
+				kind2:   "あまおう",
+				weight1: 1,
+				weight2: 2,
+			},
+			expected: false,
+		},
+		"とちおとめともういっこを比較した時にfalseを返す": {
+			args: args{
+				kind1:   "とちおとめ",
+				kind2:   "もういっこ",
+				weight1: 1,
+				weight2: 2,
+			},
+			expected: false,
+		},
 	}
 
 	for tName, test := range tests {

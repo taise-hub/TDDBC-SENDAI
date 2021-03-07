@@ -49,5 +49,4 @@ func CompareKind(berry1 *Strawbery, berry2 *Strawbery) bool {
 		return false
 	}
 	return true
-
 }

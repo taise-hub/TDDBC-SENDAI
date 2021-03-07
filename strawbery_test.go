@@ -102,10 +102,34 @@ func Test_StrawveryWeight(t *testing.T) {
 	}
 }
 
-//この辺でkindをちゃんとした名前にしたいなぁって気持ちが出てきた
-func Test_あまおうとあまおうを比較した時にtrueを返す(t *testing.T) {
-	berry1, _ := New("あまおう", 1)
-	berry2, _ := New("あまおう", 2)
-	actual := CompareKind(berry1, berry2)
-	assert.Equal(t, true, actual)
+func Test_StrawveryCompareKind(t *testing.T) {
+	type args struct {
+		kind1   string
+		kind2   string
+		weight1 uint
+		weight2 uint
+	}
+	tests := map[string]struct {
+		args     args
+		expected bool
+	}{
+		"あまおうとあまおうを比較した時にtrueを返す": {
+			args: args{
+				kind1:   "あまおう",
+				kind2:   "あまおう",
+				weight1: 1,
+				weight2: 2,
+			},
+			expected: true,
+		},
+	}
+
+	for tName, test := range tests {
+		t.Run(tName, func(t *testing.T) {
+			berry1, _ := New(test.args.kind1, test.args.weight1)
+			berry2, _ := New(test.args.kind2, test.args.weight2)
+			actual := CompareKind(berry1, berry2)
+			assert.Equal(t, test.expected, actual)
+		})
+	}
 }

@@ -14,3 +14,13 @@ func Test_品種とサイズを与えていちごを作成する(t *testing.T) {
 
 	assert.NotEmpty(t, actual)
 }
+
+func Test_品種あまおうサイズLのいちごから文字列表現を取得できる(t *testing.T) {
+	sut := Strawbery{
+		kind: "あまおう",
+		size: "L",
+	}
+	actual := sut.String()
+
+	assert.Equal(t, "あまおう: L", actual)
+}

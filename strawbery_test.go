@@ -27,3 +27,11 @@ func Test_StrawveryString(t *testing.T) {
 		assert.Equal(t, "もういっこ: M", actual)
 	})
 }
+
+func Test_StrawveryWeight(t *testing.T) {
+	t.Run("重さが0gの時エラー", func(t *testing.T) {
+		_, err := New("あまおう", 0)
+
+		assert.NotEmpty(t, err)
+	})
+}

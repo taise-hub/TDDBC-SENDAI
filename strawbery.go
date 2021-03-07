@@ -20,3 +20,7 @@ func New(kind string, weight uint) (*Strawbery, error) {
 func (berry *Strawbery) String() string {
 	return berry.kind + ": " + berry.size
 }
+
+func (berry *Strawbery) Size() string {
+	return "S"
+}

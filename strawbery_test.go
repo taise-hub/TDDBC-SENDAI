@@ -34,4 +34,11 @@ func Test_StrawveryWeight(t *testing.T) {
 
 		assert.NotEmpty(t, err)
 	})
+
+	t.Run("重さが1gの時サイズはS", func(t *testing.T) {
+		sut, _ := New("あまおう", 1)
+		actual := sut.Size()
+
+		assert.Equal(t, "S", actual)
+	})
 }

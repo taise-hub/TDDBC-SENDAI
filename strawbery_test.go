@@ -6,31 +6,24 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_品種とサイズを与えていちごを作成する(t *testing.T) {
-	actual := Strawbery{
-		kind: "あまおう",
-		size: "L",
-	}
+func Test_StrawveryString(t *testing.T) {
+	t.Run("品種:あまおう、サイズ:Lのいちごから文字列表現「あまおう: L」を取得できる", func(t *testing.T) {
+		sut := Strawbery{
+			kind: "あまおう",
+			size: "L",
+		}
+		actual := sut.String()
 
-	assert.NotEmpty(t, actual)
-}
+		assert.Equal(t, "あまおう: L", actual)
+	})
 
-func Test_品種あまおうサイズLのいちごから文字列表現を取得できる(t *testing.T) {
-	sut := Strawbery{
-		kind: "あまおう",
-		size: "L",
-	}
-	actual := sut.String()
+	t.Run("品種:もういっこ、サイズMのいちごから文字列表現「もういっこ: M」を取得できる", func(t *testing.T) {
+		sut := Strawbery{
+			kind: "もういっこ",
+			size: "M",
+		}
+		actual := sut.String()
 
-	assert.Equal(t, "あまおう: L", actual)
-}
-
-func Test_品種もういっこサイズMのいちごから文字列表現を取得できる(t *testing.T) {
-	sut := Strawbery{
-		kind: "もういっこ",
-		size: "M",
-	}
-	actual := sut.String()
-
-	assert.Equal(t, "もういっこ: M", actual)
+		assert.Equal(t, "もういっこ: M", actual)
+	})
 }

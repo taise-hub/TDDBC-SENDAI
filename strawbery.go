@@ -76,9 +76,24 @@ func convertSizeToInt(size string) uint {
 	}
 }
 
+//============================================================================================================
+
 func IsAligned(berrys []*Strawbery) bool {
 	if berrys[0].kind == berrys[1].kind && berrys[0].kind == berrys[2].kind {
 		return true
 	}
 	return false
+}
+
+func GetMinSize(berrys []*Strawbery) *Strawbery {
+	var min *Strawbery
+	if berrys[0].weight > berrys[1].weight {
+		min = berrys[1]
+	} else {
+		min = berrys[0]
+	}
+	if berrys[2].weight > min.weight {
+		return min
+	}
+	return berrys[2]
 }

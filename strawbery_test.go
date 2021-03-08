@@ -299,3 +299,15 @@ func Test_strawveryAlgne(t *testing.T) {
 	}
 
 }
+
+func Test_あまおうLとちおとめLもういっこLからなるパック内の最小サイズはL(t *testing.T) {
+	berry1, _ := New("あまおう", 20)
+	berry2, _ := New("あまおう", 20)
+	berry3, _ := New("あまおう", 20)
+	//いちごのパック詰めを表す構造体を作った方がいいのか、配列でいいのか
+	strawverys := []*Strawbery{
+		berry1, berry2, berry3,
+	}
+	actual := GetMinSize(strawverys)
+	assert.Equal(t, "L", actual.size)
+}

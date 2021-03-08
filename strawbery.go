@@ -75,3 +75,10 @@ func convertSizeToInt(size string) uint {
 		return 1
 	}
 }
+
+func IsAligned(berrys []*Strawbery) bool {
+	if berrys[0].kind == berrys[1].kind && berrys[0].kind == berrys[2].kind {
+		return true
+	}
+	return false
+}

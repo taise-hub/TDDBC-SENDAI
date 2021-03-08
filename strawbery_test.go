@@ -234,3 +234,68 @@ func Test_StrawveryCompareSize(t *testing.T) {
 	}
 
 }
+
+func Test_あまおうあまおうとちおとめからなるパックは純正でない(t *testing.T) {
+	berry1, _ := New("あまおう", 1)
+	berry2, _ := New("あまおう", 10)
+	berry3, _ := New("とちおとめ", 20)
+	strawverys := []*Strawbery{
+		berry1, berry2, berry3,
+	}
+
+	actual := IsAligned(strawverys)
+	assert.Equal(t, false, actual)
+}
+
+func Test_strawveryAlgne(t *testing.T) {
+	type args struct {
+		kind1 string
+		kind2 string
+		kind3 string
+	}
+
+	tests := map[string]struct {
+		args     args
+		expected bool
+	}{
+		"あまおう,あまおう,あまおうからなるパックは純正": {
+			args:     args{kind1: "あまおう", kind2: "あまおう", kind3: "あまおう"},
+			expected: true,
+		},
+		"とちおとめ,とちおとめ,とちおとめからなるパックは純正": {
+			args:     args{kind1: "とちおとめ", kind2: "とちおとめ", kind3: "とちおとめ"},
+			expected: true,
+		},
+		"あまおう,あまおう,とちおとめからなるパックは純正でない": {
+			args:     args{kind1: "あまおう", kind2: "あまおう", kind3: "とちおとめ"},
+			expected: false,
+		},
+		"あまおう,もういっこ,あまおうからなるパックは純正でない": {
+			args:     args{kind1: "あまおう", kind2: "もういっこ", kind3: "あまおう"},
+			expected: false,
+		},
+		"あまおう,とちおとめ,もういっこからなるパックは純正でない": {
+			args:     args{kind1: "あまおう", kind2: "とちおとめ", kind3: "もういっこ"},
+			expected: false,
+		},
+		"もういっこ,あまおう,とちおとめからなるパックは純正でない": {
+			args:     args{kind1: "もういっこ", kind2: "あまおう", kind3: "とちおとめ"},
+			expected: false,
+		},
+	}
+
+	for tName, test := range tests {
+		t.Run(tName, func(t *testing.T) {
+			berry1, _ := New(test.args.kind1, 1)
+			berry2, _ := New(test.args.kind2, 10)
+			berry3, _ := New(test.args.kind3, 20)
+			strawverys := []*Strawbery{
+				berry1, berry2, berry3,
+			}
+
+			actual := IsAligned(strawverys)
+			assert.Equal(t, test.expected, actual)
+		})
+	}
+
+}

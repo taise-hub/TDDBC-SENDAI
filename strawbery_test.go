@@ -235,19 +235,7 @@ func Test_StrawveryCompareSize(t *testing.T) {
 
 }
 
-func Test_あまおうあまおうとちおとめからなるパックは純正でない(t *testing.T) {
-	berry1, _ := New("あまおう", 1)
-	berry2, _ := New("あまおう", 10)
-	berry3, _ := New("とちおとめ", 20)
-	strawverys := []*Strawbery{
-		berry1, berry2, berry3,
-	}
-
-	actual := IsAligned(strawverys)
-	assert.Equal(t, false, actual)
-}
-
-func Test_strawveryAlgne(t *testing.T) {
+func Test_strawverysAlgne(t *testing.T) {
 	type args struct {
 		kind1 string
 		kind2 string
@@ -300,14 +288,42 @@ func Test_strawveryAlgne(t *testing.T) {
 
 }
 
-func Test_あまおうLとちおとめLもういっこLからなるパック内の最小サイズはL(t *testing.T) {
-	berry1, _ := New("あまおう", 20)
-	berry2, _ := New("あまおう", 20)
-	berry3, _ := New("あまおう", 20)
-	//いちごのパック詰めを表す構造体を作った方がいいのか、配列でいいのか
-	strawverys := []*Strawbery{
-		berry1, berry2, berry3,
+func Test_StrawverysMinSize(t *testing.T) {
+	type args struct {
+		size1 uint
+		size2 uint
+		size3 uint
 	}
-	actual := GetMinSize(strawverys)
-	assert.Equal(t, "L", actual.size)
+	tests := map[string]struct {
+		args     args
+		expected string
+	}{
+		"あまおう L,とちおとめ L,もういっこ L からなるパック内の最小サイズはL": {
+			args: args{
+				size1: 20, size2: 20, size3: 20,
+			},
+			expected: "L",
+		},
+		"あまおう S,とちおとめ M,もういっこ LL からなるパック内の最小サイズはS": {
+			args: args{
+				size1: 1, size2: 10, size3: 25,
+			},
+			expected: "S",
+		},
+	}
+
+	for tName, test := range tests {
+		t.Run(tName, func(t *testing.T) {
+			berry1, _ := New("あまおう", test.args.size1)
+			berry2, _ := New("とちおとめ", test.args.size2)
+			berry3, _ := New("もういっこ", test.args.size3)
+			//いちごのパック詰めを表す構造体を作った方がいいのか、配列でいいのか
+			strawverys := []*Strawbery{
+				berry1, berry2, berry3,
+			}
+			actual := GetMinSize(strawverys)
+			assert.Equal(t, test.expected, actual.size)
+		})
+	}
+
 }

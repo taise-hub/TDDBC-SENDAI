@@ -179,16 +179,58 @@ func Test_StrawveryCompareKind(t *testing.T) {
 	}
 }
 
-func Test_LとLを比較するとuintの0を返す(t *testing.T) {
-	berry1, _ := New("とちおとめ", 24)
-	berry2, _ := New("とちおとめ", 20)
-	actual := CompareSize(berry1, berry2)
-	assert.Equal(t, uint(0), actual)
-}
+func Test_StrawveryCompareSize(t *testing.T) {
+	type args struct {
+		weight1 uint
+		weight2 uint
+	}
+	tests := map[string]struct {
+		args     args
+		expected uint
+	}{
+		"LとLを比較するとuintの0を返す": {
+			args: args{
+				weight1: 24,
+				weight2: 20,
+			},
+			expected: uint(0),
+		},
+		"LとLLを比較するとuintの1を返す": {
+			args: args{
+				weight1: 20,
+				weight2: 30,
+			},
+			expected: uint(1),
+		},
+		"LLとLを比較するとuintの1を返す": {
+			args: args{
+				weight1: 30,
+				weight2: 20,
+			},
+			expected: uint(1),
+		},
+		"LLとSを比較するとuintの3を返す": {
+			args: args{
+				weight1: 30,
+				weight2: 9,
+			},
+			expected: uint(3),
+		},
+		"MとSを比較するとuintの1を返す": {
+			args: args{
+				weight1: 19,
+				weight2: 9,
+			},
+			expected: uint(1),
+		},
+	}
+	for tName, test := range tests {
+		t.Run(tName, func(t *testing.T) {
+			berry1, _ := New("とちおとめ", test.args.weight1)
+			berry2, _ := New("とちおとめ", test.args.weight2)
+			actual := CompareSize(berry1, berry2)
+			assert.Equal(t, test.expected, actual)
+		})
+	}
 
-func Test_LとLLを比較するとuintの1を返す(t *testing.T) {
-	berry1, _ := New("とちおとめ", 20)
-	berry2, _ := New("とちおとめ", 30)
-	actual := CompareSize(berry1, berry2)
-	assert.Equal(t, uint(1), actual)
 }

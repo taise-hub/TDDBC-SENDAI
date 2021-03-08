@@ -327,3 +327,43 @@ func Test_StrawverysMinSize(t *testing.T) {
 	}
 
 }
+
+func Test_StrawverysMaxSize(t *testing.T) {
+	type args struct {
+		size1 uint
+		size2 uint
+		size3 uint
+	}
+	tests := map[string]struct {
+		args     args
+		expected string
+	}{
+		"あまおう L,とちおとめ L,もういっこ L からなるパック内の最大サイズはL": {
+			args: args{
+				size1: 20, size2: 20, size3: 20,
+			},
+			expected: "L",
+		},
+		"あまおう S,とちおとめ M,もういっこ LL からなるパック内の最大サイズはLL": {
+			args: args{
+				size1: 1, size2: 10, size3: 25,
+			},
+			expected: "LL",
+		},
+	}
+
+	for tName, test := range tests {
+		t.Run(tName, func(t *testing.T) {
+			berry1, _ := New("あまおう", test.args.size1)
+			berry2, _ := New("とちおとめ", test.args.size2)
+			berry3, _ := New("もういっこ", test.args.size3)
+			//いちごのパック詰めを表す構造体を作った方がいいのか、配列でいいのか
+			strawverys := []*Strawbery{
+				berry1, berry2, berry3,
+			}
+			actual := GetMaxSize(strawverys)
+			assert.Equal(t, test.expected, actual.size)
+		})
+	}
+
+}

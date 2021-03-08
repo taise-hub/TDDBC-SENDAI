@@ -97,3 +97,16 @@ func GetMinSize(berrys []*Strawbery) *Strawbery {
 	}
 	return berrys[2]
 }
+
+func GetMaxSize(berrys []*Strawbery) *Strawbery {
+	var max *Strawbery
+	if berrys[0].weight < berrys[1].weight {
+		max = berrys[1]
+	} else {
+		max = berrys[0]
+	}
+	if berrys[2].weight < max.weight {
+		return max
+	}
+	return berrys[2]
+}

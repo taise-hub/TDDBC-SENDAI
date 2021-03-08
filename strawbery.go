@@ -54,22 +54,21 @@ func CompareKind(berry1 *Strawbery, berry2 *Strawbery) bool {
 	return true
 }
 
-func CompareSize(berry1 *Strawbery, berry2 *Strawbery) uint {
+func CompareSize(berry1 *Strawbery, berry2 *Strawbery) (uint, error) {
 	sizeNum1, err := convertSizeToInt(berry1.size)
 	if err != nil {
-		return 0
+		return 0, err
 	}
 	sizeNum2, err := convertSizeToInt(berry2.size)
 	if err != nil {
-		return 0
+		return 0, err
 	}
-
 	diff := math.Abs(float64(sizeNum1) - float64(sizeNum2))
 
-	return uint(diff)
+	return uint(diff), nil
 }
 
-func convertSizeToInt(size string) (int, error) {
+func convertSizeToInt(size string) (uint, error) {
 	switch {
 	case size == "LL":
 		return 4, nil

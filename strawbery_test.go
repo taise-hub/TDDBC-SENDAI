@@ -185,3 +185,10 @@ func Test_LとLを比較するとuintの0を返す(t *testing.T) {
 	actual := CompareSize(berry1, berry2)
 	assert.Equal(t, uint(0), actual)
 }
+
+func Test_LとLLを比較するとuintの1を返す(t *testing.T) {
+	berry1, _ := New("とちおとめ", 20)
+	berry2, _ := New("とちおとめ", 30)
+	actual := CompareSize(berry1, berry2)
+	assert.Equal(t, uint(1), actual)
+}

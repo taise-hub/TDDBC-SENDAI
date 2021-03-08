@@ -1,6 +1,9 @@
 package strawbery
 
-import "errors"
+import (
+	"errors"
+	"math"
+)
 
 type Strawbery struct {
 	kind   string
@@ -52,5 +55,31 @@ func CompareKind(berry1 *Strawbery, berry2 *Strawbery) bool {
 }
 
 func CompareSize(berry1 *Strawbery, berry2 *Strawbery) uint {
-	return 0
+	sizeNum1, err := convertSizeToInt(berry1.size)
+	if err != nil {
+		return 0
+	}
+	sizeNum2, err := convertSizeToInt(berry2.size)
+	if err != nil {
+		return 0
+	}
+
+	diff := math.Abs(float64(sizeNum1) - float64(sizeNum2))
+
+	return uint(diff)
+}
+
+func convertSizeToInt(size string) (int, error) {
+	switch {
+	case size == "LL":
+		return 4, nil
+	case size == "L":
+		return 3, nil
+	case size == "M":
+		return 2, nil
+	case size == "S":
+		return 1, nil
+	default:
+		return 0, errors.New("おや,サイズがおかしいよ。")
+	}
 }

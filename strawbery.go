@@ -110,3 +110,9 @@ func GetMaxSize(berrys []*Strawbery) *Strawbery {
 	}
 	return berrys[2]
 }
+
+func GetDiffSize(berrys []*Strawbery) uint {
+	min := GetMinSize(berrys)
+	max := GetMaxSize(berrys)
+	return CompareSize(max, min)
+}

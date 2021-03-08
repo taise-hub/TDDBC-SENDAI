@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_StrawveryString(t *testing.T) {
+func Test_StrawberyString(t *testing.T) {
 	type args struct {
 		kind string
 		size string
@@ -51,7 +51,7 @@ func Test_StrawveryString(t *testing.T) {
 
 }
 
-func Test_StrawveryWeight(t *testing.T) {
+func Test_StrawberyWeight(t *testing.T) {
 	t.Run("重さが0gの時エラー", func(t *testing.T) {
 		_, err := New("あまおう", 0)
 		assert.NotEmpty(t, err)
@@ -102,7 +102,7 @@ func Test_StrawveryWeight(t *testing.T) {
 	}
 }
 
-func Test_StrawveryCompareKind(t *testing.T) {
+func Test_StrawberyCompareKind(t *testing.T) {
 	type args struct {
 		kind1   string
 		kind2   string
@@ -179,7 +179,7 @@ func Test_StrawveryCompareKind(t *testing.T) {
 	}
 }
 
-func Test_StrawveryCompareSize(t *testing.T) {
+func Test_StrawberyCompareSize(t *testing.T) {
 	type args struct {
 		weight1 uint
 		weight2 uint
@@ -235,7 +235,7 @@ func Test_StrawveryCompareSize(t *testing.T) {
 
 }
 
-func Test_strawverysAlgne(t *testing.T) {
+func Test_strawberysAlgne(t *testing.T) {
 	type args struct {
 		kind1 string
 		kind2 string
@@ -288,7 +288,7 @@ func Test_strawverysAlgne(t *testing.T) {
 
 }
 
-func Test_StrawverysMinSize(t *testing.T) {
+func Test_StrawberysMinSize(t *testing.T) {
 	type args struct {
 		size1 uint
 		size2 uint
@@ -328,7 +328,7 @@ func Test_StrawverysMinSize(t *testing.T) {
 
 }
 
-func Test_StrawverysMaxSize(t *testing.T) {
+func Test_StrawberysMaxSize(t *testing.T) {
 	type args struct {
 		size1 uint
 		size2 uint
@@ -358,12 +358,56 @@ func Test_StrawverysMaxSize(t *testing.T) {
 			berry2, _ := New("とちおとめ", test.args.size2)
 			berry3, _ := New("もういっこ", test.args.size3)
 			//いちごのパック詰めを表す構造体を作った方がいいのか、配列でいいのか
-			strawverys := []*Strawbery{
+			strawberys := []*Strawbery{
 				berry1, berry2, berry3,
 			}
-			actual := GetMaxSize(strawverys)
+			actual := GetMaxSize(strawberys)
 			assert.Equal(t, test.expected, actual.size)
 		})
 	}
 
+}
+
+func Test_StrawberysDiffSize(t *testing.T) {
+	type args struct {
+		size1 uint
+		size2 uint
+		size3 uint
+	}
+	tests := map[string]struct {
+		args     args
+		expected uint
+	}{
+		"あまおう L とちおとめ L もういっこ L からなるパックの最小サイズと最大サイズの差は0": {
+			args: args{
+				size1: 20, size2: 20, size3: 20,
+			},
+			expected: uint(0),
+		},
+		"あまおう S とちおとめ M もういっこ L からなるパックの最小サイズと最大サイズの差は2": {
+			args: args{
+				size1: 1, size2: 10, size3: 24,
+			},
+			expected: uint(2),
+		},
+		"あまおう L とちおとめ M もういっこ L からなるパックの最小サイズと最大サイズの差は1": {
+			args: args{
+				size1: 24, size2: 10, size3: 24,
+			},
+			expected: uint(1),
+		},
+	}
+
+	for tName, test := range tests {
+		t.Run(tName, func(t *testing.T) {
+			berry1, _ := New("あまおう", test.args.size1)
+			berry2, _ := New("とちおとめ", test.args.size2)
+			berry3, _ := New("もういっこ", test.args.size3)
+			strawberys := []*Strawbery{
+				berry1, berry2, berry3,
+			}
+			actual := GetDiffSize(strawberys)
+			assert.Equal(t, test.expected, actual)
+		})
+	}
 }

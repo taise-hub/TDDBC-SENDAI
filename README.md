@@ -1,2 +1,3 @@
 # tddbc
-TDDBC Sendaiの復習
+
+TDDBC Sendaiで行ったTDDの練習

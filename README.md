@@ -1,2 +1,2 @@
 # tddbc
-TDDBC Sendai
+TDDBC Sendaiで行ったTDDの練習
